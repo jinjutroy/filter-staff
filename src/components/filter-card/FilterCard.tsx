@@ -50,7 +50,6 @@ const FilterCard: React.FC<PropsFilterComponent> = (props) => {
           className={styles["filter-select"]}
           placeholder="Select "
           onChange={handleChange}
-          optionLabelProp="label"
           options={options}
           value={filterC}
           allowClear
@@ -68,6 +67,8 @@ const FilterCard: React.FC<PropsFilterComponent> = (props) => {
             </Space>
           )}
         />
+      </div>
+      <div className={styles["wrapper-btn"]}>
         <Button
           type="primary"
           className={styles["filter-button"]}
