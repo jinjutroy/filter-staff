@@ -3,9 +3,17 @@ import { Button, Card, Select, Space } from "antd";
 import { MutableRefObject, useState } from "react";
 import { unAccent } from "../../../utils/functions";
 import styles from "./FilterCard.module.css";
+import { DataTypeItem } from "@/app/page";
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+}
 
 type PropsFilterComponent = {
-  items: any[];
+  items: DataTypeItem[];
   filter: MutableRefObject<string[]>;
   onSearch: () => void;
   onReset: () => void;
@@ -17,15 +25,19 @@ const FilterCard: React.FC<PropsFilterComponent> = (props) => {
     props.filter.current = value;
     setFilterC(value);
   };
-  const options = props.items.map((item) => {
-    return {
-      id: item["ID"],
-      value: item["ID"],
-      label: item["ID"] + " - " + item["NHAN VIEN"],
-      emoji: item["ID"],
-      desc: item["NHAN VIEN"],
-    };
-  });
+  const options: any = props.items.reduce((prev: any, cur) => {
+    if (prev.find((item: { id: string }) => item.id === cur["ID"])) return prev;
+    return [
+      ...prev,
+      {
+        id: cur["ID"],
+        value: cur["ID"],
+        label: cur["ID"] + " - " + cur["NHAN VIEN"],
+        emoji: cur["ID"],
+        desc: cur["NHAN VIEN"],
+      },
+    ];
+  }, []);
   const onResetCard = () => {
     setFilterC([]);
     props.onReset();
