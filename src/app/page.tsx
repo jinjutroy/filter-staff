@@ -110,7 +110,7 @@ export default function Home() {
     const filterItems = arrBase.filter((item): boolean => {
       const inCharge = item["IN CHARGE"].split(",");
       if (inCharge.length === 1) {
-        return filter.current.includes(inCharge[0]);
+        return filter.current.includes(inCharge[0].trim());
       }
       return isTrue(inCharge, filter.current);
     });

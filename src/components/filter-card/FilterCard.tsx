@@ -22,7 +22,7 @@ type PropsFilterComponent = {
 const FilterCard: React.FC<PropsFilterComponent> = (props) => {
   const [filterC, setFilterC] = useState(props.filter.current);
   const handleChange = (value: string[]) => {
-    props.filter.current = value;
+    props.filter.current = value.map((item) => item.trim());
     setFilterC(value);
   };
   const options: any = props.items.reduce((prev: any, cur) => {
