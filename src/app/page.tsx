@@ -1,7 +1,7 @@
 "use client";
 import { ExportOutlined, UploadOutlined } from "@ant-design/icons";
 import { Button, Card, Table, Tag, Upload, UploadProps, message } from "antd";
-import { useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 
 import FilterCard from "@/components/filter-card/FilterCard";
@@ -121,6 +121,18 @@ export default function Home() {
       setPing(false);
     }, 2000);
   };
+
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => {
+      if (event.code === "Enter" || event.keyCode === 13) {
+        onSearch();
+      }
+    };
+    document.addEventListener("keydown", listener);
+    return () => {
+      document.removeEventListener("keydown", listener);
+    };
+  }, [filter.current]);
 
   const onReset = () => {
     setResult([]);
