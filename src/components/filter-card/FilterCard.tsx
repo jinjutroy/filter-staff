@@ -25,6 +25,7 @@ const FilterCard: React.FC<PropsFilterComponent> = (props) => {
     props.filter.current = value.map((item) => item.trim());
     setFilterC(value);
   };
+
   const options: any = props.items.reduce((prev: any, cur) => {
     if (prev.find((item: { id: string }) => item.id === cur["ID"])) return prev;
     return [

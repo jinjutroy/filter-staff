@@ -3,6 +3,7 @@ import { ExportOutlined } from "@ant-design/icons";
 import styles from "./Export.module.css";
 
 type ExportProps = {
+  total: number;
   disabled: boolean;
   onExport: () => void;
 };
@@ -10,7 +11,7 @@ type ExportProps = {
 const ExportFile: React.FC<ExportProps> = (props) => {
   return (
     <div className={styles["export-wrapper"]}>
-      <h3>List</h3>
+      <h3>List ({props.total})</h3>
       <Button
         disabled={props.disabled}
         type="primary"

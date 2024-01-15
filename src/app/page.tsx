@@ -158,7 +158,11 @@ export default function Home() {
           />
           <Card
             title={
-              <ExportFile disabled={result?.length === 0} onExport={onExport} />
+              <ExportFile
+                total={filter.current.length > 0 ? result.length : items.length}
+                disabled={result?.length === 0}
+                onExport={onExport}
+              />
             }
             className={styles["card-table"]}
           >
@@ -168,6 +172,12 @@ export default function Home() {
               dataSource={filter.current.length > 0 ? result : items}
               bordered
               scroll={{ x: 600 }}
+              pagination={{
+                showSizeChanger: true,
+                pageSizeOptions: ["10", "20", "50", "100"],
+                showTotal: (total, range) =>
+                  `${range[0]}-${range[1]} of ${total} items`,
+              }}
             />
           </Card>
         </>
