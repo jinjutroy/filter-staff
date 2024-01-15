@@ -21,6 +21,7 @@ export default function Home() {
   const [items, setItems] = useState<DataTypeItem[]>([]);
   const [result, setResult] = useState<DataTypeItem[]>([]);
   const filter = useRef<string[]>([]);
+  const [ping, setPing] = useState(false);
 
   const readUploadFile = (file: Blob) => {
     const promise = new Promise((resolve, reject) => {
@@ -114,7 +115,11 @@ export default function Home() {
       }
       return isTrue(inCharge, filter.current);
     });
+    setPing(true);
     debouncedSetResult(filterItems);
+    setTimeout(() => {
+      setPing(false);
+    }, 2000);
   };
 
   const onReset = () => {
@@ -145,6 +150,12 @@ export default function Home() {
 
   return (
     <div className={styles["root"]}>
+      {ping && (
+        <div className="pyro">
+          <div className="before"></div>
+          <div className="after"></div>
+        </div>
+      )}
       <Upload {...props}>
         <Button icon={<UploadOutlined />}>Click to Upload</Button>
       </Upload>
