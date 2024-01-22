@@ -23,6 +23,41 @@ export default function Home() {
   const filter = useRef<string[]>([]);
   const [ping, setPing] = useState(false);
 
+  const columns: ColumnsType<DataTypeItem> = [
+    {
+      title: "ID",
+      dataIndex: "ID",
+      key: "id",
+      width: 100,
+    },
+    {
+      title: "NHAN VIEN",
+      dataIndex: "NHAN VIEN",
+      key: "staff",
+      width: 400,
+    },
+    {
+      title: "JOB",
+      dataIndex: "JOB",
+      key: "job",
+      width: 200,
+    },
+    {
+      title: "IN CHARGE",
+      dataIndex: "IN CHARGE",
+      key: "in charge",
+      width: 200,
+      render: (text: string) => {
+        const arrId = text.split(",");
+        return arrId.map((id, i) => (
+          <Tag color="pink-inverse" key={i}>
+            {id}
+          </Tag>
+        ));
+      },
+    },
+  ];
+  const [col, setCol] = useState(columns);
   const readUploadFile = (file: Blob) => {
     const promise = new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -42,7 +77,21 @@ export default function Home() {
       };
     });
     promise.then((d: any) => {
+      const temp = Object.keys(d[0]);
       setItems(d);
+      setCol(columns);
+      temp.forEach((item, idx) => {
+        idx > 3 &&
+          setCol((col) => [
+            ...col,
+            {
+              title: item.toUpperCase(),
+              dataIndex: item,
+              key: item,
+              width: 500,
+            },
+          ]);
+      });
     });
   };
 
@@ -71,39 +120,6 @@ export default function Home() {
       setResult([]);
     },
   };
-  const columns: ColumnsType<DataTypeItem> = [
-    {
-      title: "ID",
-      dataIndex: "ID",
-      key: "id",
-      width: "10%",
-    },
-    {
-      title: "NHAN VIEN",
-      dataIndex: "NHAN VIEN",
-      key: "staff",
-    },
-    {
-      title: "JOB",
-      dataIndex: "JOB",
-      key: "job",
-      width: "20%",
-    },
-    {
-      title: "IN CHARGE",
-      dataIndex: "IN CHARGE",
-      key: "in charge",
-      width: "30%",
-      render: (text: string) => {
-        const arrId = text.split(",");
-        return arrId.map((id, i) => (
-          <Tag color="pink-inverse" key={i}>
-            {id}
-          </Tag>
-        ));
-      },
-    },
-  ];
 
   const debouncedSetResult = debounce(setResult, 200);
   const onSearch = () => {
@@ -191,10 +207,10 @@ export default function Home() {
           >
             <Table
               key={"ID"}
-              columns={columns}
+              columns={col}
               dataSource={filter.current.length > 0 ? result : items}
               bordered
-              scroll={{ x: 600 }}
+              scroll={{ x: 700 }}
               pagination={{
                 showSizeChanger: true,
                 pageSizeOptions: ["10", "20", "50", "100"],
