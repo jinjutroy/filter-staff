@@ -89,6 +89,10 @@ export default function Home() {
               dataIndex: item,
               key: item,
               width: 500,
+              render: (text: string) => {
+                const formatText = text.replaceAll("\r\n", "<br/>");
+                return <div dangerouslySetInnerHTML={{ __html: formatText }} />;
+              },
             },
           ]);
       });
