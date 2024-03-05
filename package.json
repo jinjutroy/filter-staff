@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antd": "^5.12.8",
+    "dayjs": "^1.11.10",
     "file-saver": "^2.0.5",
     "next": "14.0.4",
     "react": "^18",
@@ -23,6 +24,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "sass": "^1.71.1",
     "typescript": "^5"
   }
 }

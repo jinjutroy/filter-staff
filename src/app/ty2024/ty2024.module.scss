@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Aria&display=swap");
+
+.container {
+  min-height: 100vh;
+  min-height: 100svh;
+  background: url(https://img.freepik.com/vector-gratis/fondo-abstracto-blanco_23-2148806276.jpg?size=626&ext=jpg) no-repeat center;
+  background-size: cover;
+  padding-top: 2rem;
+}
+
+.desc-wish {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Aria';
+  font-size: 1.2rem;
+  text-align: start;
+  margin-bottom: 2rem;
+
+  p {
+    padding: .5rem 0;
+  }
+}
+
+.input-pass {
+  margin-top: 2rem;
+}
+
+.time {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.1;
+}
