@@ -12,7 +12,7 @@ var toObject = require("dayjs/plugin/toObject");
 dayjs.extend(toObject);
 
 const PageClient = () => {
-  const [pass, setPass] = useState(true);
+  const [pass, setPass] = useState(false);
   const [duration, setDuration] = useState({
     days: 0,
     hours: 0,
